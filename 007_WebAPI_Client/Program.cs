@@ -271,6 +271,7 @@ namespace _007_WebAPI_Client
                         case 2:
                             var nextGadgets = getNextGadgets(nextCollection);
                             ShowAllGadgets(nextGadgets);
+                            ShowGadgetChoiceSC(ref choiceString, ref choiceTry, nextGadgets);
                             break;
                         case 3:
                             var prevGadgets = getPrevGadgets();
@@ -339,11 +340,11 @@ namespace _007_WebAPI_Client
                             ShowCharChoiceSC(ref choiceString, ref choiceTry, nextChars);
                             break;
                         case 3:
-                            var prevMovies = getPrevMovies();
-                            ShowAllMovies(prevMovies);
+                            var prevChars = getPrevChars();
+                            ShowAllChars(prevChars);
                             break;
                         case 4:
-                            inMovieListMenu = false;
+                            inCharListMenu = false;
                             break;
                         default:
                             break;
@@ -390,32 +391,32 @@ namespace _007_WebAPI_Client
                                             inMovieCharDetailMenu = true;
                                             while (inMovieCharDetailMenu)
                                             {
-
-                                            }
-                                            ShowCharDetails(character);
-                                            Console.WriteLine("1) Back to Movie Details");
-                                            Console.WriteLine("2) Main Menu");
-                                            choiceString = Read("> ");
-                                            Console.WriteLine();
-                                            int.TryParse(choiceString, out choiceTry);
-                                            if (choiceTry > 0)
-                                            {
-                                                int movieCharDetailsChoice = int.Parse(choiceString);
-
-                                                switch (movieCharDetailsChoice)
+                                                ShowCharDetails(character);
+                                                Console.WriteLine("1) Back to Movie Details");
+                                                Console.WriteLine("2) Main Menu");
+                                                choiceString = Read("> ");
+                                                Console.WriteLine();
+                                                int.TryParse(choiceString, out choiceTry);
+                                                if (choiceTry > 0)
                                                 {
-                                                    case 1:
-                                                        inMovieCharDetailMenu = false;
-                                                        break;
-                                                    case 2:
-                                                        inMovieCharDetailMenu = false;
-                                                        inMovieDetailMenu = false;
-                                                        inMovieListMenu = false;
-                                                        break;
-                                                    default:
-                                                        break;
+                                                    int movieCharDetailsChoice = int.Parse(choiceString);
+
+                                                    switch (movieCharDetailsChoice)
+                                                    {
+                                                        case 1:
+                                                            inMovieCharDetailMenu = false;
+                                                            break;
+                                                        case 2:
+                                                            inMovieCharDetailMenu = false;
+                                                            inMovieDetailMenu = false;
+                                                            inMovieListMenu = false;
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
                                                 }
                                             }
+                                            
                                             break;
                                         case 2:
                                             inMovieDetailMenu = false;
@@ -465,7 +466,7 @@ namespace _007_WebAPI_Client
         {
             Console.WriteLine($"Here are the details of {character.Name}");
             Console.WriteLine($"Name: {character.Name}");
-            Console.WriteLine($"ReleaseDate: {character.Bio}");
+            Console.WriteLine($"Bio: {character.Bio}");
             Console.WriteLine();
         }
 
@@ -519,9 +520,10 @@ namespace _007_WebAPI_Client
         private static void ShowGadgetDetails(Gadget gadget)
         {
             Console.WriteLine($"Here are the details of {gadget.Name}");
-            Console.WriteLine($"Title: {gadget.Name}");
-            Console.WriteLine($"ReleaseDate: {gadget.Description}");
-            Console.WriteLine($"Owner: {gadget.Owner}");
+            Console.WriteLine($"Name: {gadget.Name}");
+            Console.WriteLine($"Desctiption: {gadget.Description}");
+            Console.WriteLine($"Owner Name: {gadget.Owner.Name}");
+            Console.WriteLine($"Owner Id: {gadget.Owner.Id}");
         }
 
         private static void ShowMovieListMenu()
